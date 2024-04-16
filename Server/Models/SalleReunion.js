@@ -1,14 +1,17 @@
 
 const mongoose = require("mongoose");
 
-const equipementSchema = mongoose.Schema({
-        inventory : Number,
-        type :String,
-});
+// const equipementSchema = mongoose.Schema({
+//         inventory : Number,
+//         type :String,
+// });
 
 const salleReunionSchema = mongoose.Schema({
         capacite : Number,
-        equipements :[equipementSchema],
+        equipements : {
+                type : [String],
+                default : []
+        },
         disponibilite :{
          type : Boolean,
          default : true,

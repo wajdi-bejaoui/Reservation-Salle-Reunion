@@ -2,8 +2,9 @@
 const mongoose = require("mongoose");
 
 const reservationSchema = mongoose.Schema({
-        start : Date,
-        end : Date,
+        start : String,
+        end : String,
+        date : Date,
         salleReunion: {
             type: mongoose.Schema.ObjectId,
             ref: 'SalleReunion',
