@@ -8,8 +8,6 @@ const { StatusCodes } = require('http-status-codes');
 const createSalle = async (req, res) => {
   console.log(req.body)
 
-
-  req.body.user = req.user.id;
   const salle = await SalleReunion.create(req.body);
   if (salle)
     return res.status(StatusCodes.CREATED).json({ salle });
@@ -36,19 +34,19 @@ const updateSalle = async (req, res) => {
   const { id: salleId } = req.params;
   const { capacite, equipements, disponibilite } = req.body;
 
-  const doc = await SalleReunion.findOne({ _id: salleId },{ new: true });
+  const salleReunion = await SalleReunion.findOne({ _id: salleId });
 
-  if (!doc) {
+  if (!salleReunion) {
     return res.status(StatusCodes.NOT_FOUND).json({ msg: `No room with id ${salleId}`});
   }
 
   // checkPermissions(req.user, review.user);
 
-  doc.capacite = capacite;
-  doc.equipements = equipements;
-  doc.disponibilite = disponibilite;
+  salleReunion.capacite = capacite;
+  salleReunion.equipements = equipements;
+  salleReunion.disponibilite = disponibilite;
 
-  const UpdatedSalle = await doc.save();
+  const UpdatedSalle = await salleReunion.save();
   if (UpdatedSalle)
     return res.status(StatusCodes.OK).json({ salle : UpdatedSalle });
   else

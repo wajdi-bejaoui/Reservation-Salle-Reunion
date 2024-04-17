@@ -11,12 +11,15 @@ const {
     updateSalle,
     deleteSalle,
   } = require('../Controllers/salleReunionController');
+  const { authenticateUser } = require('../middleware/authentication');
+
+  
 
 
 
-router.post('/', createSalle);
-router.delete('/', deleteSalle);
-router.get('/', getAllSalles);
-router.put('/', updateSalle);
+router.post('/',authenticateUser, createSalle);
+router.delete('/:id',authenticateUser, deleteSalle);
+router.get('/',authenticateUser, getAllSalles);
+router.put('/:id',authenticateUser, updateSalle);
 
 module.exports = router; 
