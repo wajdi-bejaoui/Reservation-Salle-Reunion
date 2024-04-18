@@ -15,23 +15,23 @@ app.set('view engine', 'ejs');
 const authRoutes = require("./Routes/authRoutes")
 const salleReunionRoutes = require("./Routes/salleReunionRoutes")
 app.use('/auth',authRoutes)
-app.use('/salleReunion',salleReunionRoutes)
+app.use('/SalleReunion',salleReunionRoutes)
 
 app.get('/AddSalleReunion', (req, res) => {
-    res.render('SalleReunion/AddSalleReunion');
+    res.render('salleReunion/AddSalleReunion');
 });
 
-app.get('/ListSalleReunion', (req, res) => {
-    // res.render('SalleReunion/ListSalleReunion');
-    axios.get('https://localhost:3000/ListSalleReunion')
-  .then(response => {
-    console.log('Response:', response.data);
-    res.render('SalleReunion/ListSalleReunion', { list : response.SalleReunions });
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
-});
+// app.get('/ListSalleReunion', (req, res) => {
+//     // res.render('SalleReunion/ListSalleReunion');
+//     axios.get('https://localhost:3000/ListSalleReunion')
+//   .then(response => {
+//     console.log('Response:', response.data);
+//     res.render('SalleReunion/ListSalleReunion', { list : response.SalleReunions });
+//   })
+//   .catch(error => {
+//     console.error('Error:');
+//   });
+// });
 
 
 

@@ -93,8 +93,10 @@ table {
 }
 
   </style>
+
 </head>
 <body>
+   
 
 <div class="container">
     <div class="table-container">
@@ -113,20 +115,30 @@ table {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>John Doe</td>
-              <td>john@example.com</td>
-              <td>Admin</td>
-              <td>john@example.com</td>
-              <td class="group">
-                <button class="btn-update">
-                    update
-                </button>
-                <button class="btn-delete">
-                    delete
-                </button>
-              </td>
-            </tr>
+            
+            <% if (list.length > 0 ) { %>
+                <%list.forEach(room => { %>
+                    <h3> 
+                        <tr>
+                            <td><%= room._id %></td>
+                            <td><%= room.capacite %></td>
+                            <td><%= room.equipements %></td>
+                            <td><%= room.disponibilite %></td>
+                            <td class="group">
+                              <button class="btn-update">
+                                  update
+                              </button>
+                              <button class="btn-delete">
+                                  delete
+                              </button>
+                            </td>
+                          </tr>
+
+                <% }) %>
+            <% } else { %>
+            <h3>no rooms yet</h3>
+            <% } %>
+            
             
           </tbody>
         </table>

@@ -61,8 +61,12 @@ const login = async (req, res) => {
             return res.json({ msg: "Please check your Password" }).status(StatusCodes.UNAUTHORIZED);
         }
         const token = jwt.sign({user : doc}, secretKey, { expiresIn: '24h' });
+
+        res.cookie('token', token); 
+        res.redirect('/reservation');
+
     
-        res.json({ msg: "Welcome", token: token });
+        // res.json({ msg: "Welcome", token: token });
 }
 
 

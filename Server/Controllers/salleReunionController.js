@@ -20,11 +20,14 @@ const createSalle = async (req, res) => {
 
 const getAllSalles = async (req, res) => {
   const salles = await SalleReunion.find({ })
+  console.log(salles)
 
   if (salles) 
-    return res.status(StatusCodes.OK).json({ salles });
+    // return res.status(StatusCodes.OK).json({ salles });
+    res.render('SalleReunion/ListSalleReunion', { list : salles });
   else
-    return res.status(StatusCodes.NOT_FOUND).json({ msg : 'there are no rooms' });
+    // return res.status(StatusCodes.NOT_FOUND).json({ msg : 'there are no rooms' });
+    res.render('SalleReunion/ListSalleReunion', { list : [] });
 
 
 };

@@ -17,9 +17,9 @@ const {
 
 
 
-router.post('/',authenticateUser, createSalle);
+router.post('/', createSalle);
 router.delete('/:id',authenticateUser, deleteSalle);
-router.get('/',authenticateUser, getAllSalles);
+router.get('/ListSalleReunion', getAllSalles);
 router.put('/:id',authenticateUser, updateSalle);
 
 module.exports = router; 
