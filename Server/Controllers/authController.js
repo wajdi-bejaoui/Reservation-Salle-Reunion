@@ -4,7 +4,6 @@ const jwt = require ("jsonwebtoken");
 const express = require("express");
 const { StatusCodes } = require('http-status-codes');
 const { log } = require("util");
-const multer = require("multer");
 const path = require ("path");
 const app = express();
 const secretKey = process.env.JWT_SECRET;

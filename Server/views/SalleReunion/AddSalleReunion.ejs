@@ -1,0 +1,89 @@
+
+  <!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      /* Style the form container */
+.form-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style form elements */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="number"],
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Style the submit button */
+.btn-submit {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-submit:hover {
+  background-color: #45a049;
+}
+      .container {        
+        padding: 20px;
+        align-content: center;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>Ajout salle de reunion</h2>
+      <form action="/salleReunion" method="POST">
+        <div class="form-group">
+          <label for="capacite">Capacite:</label>
+          <input type="number" id="capacite" name="capacite" required>
+        </div>
+        <div class="form-group">
+          <label for="equipements">Equipements:</label>
+          <input type="text" id="equipements" name="equipements" required>
+        </div>
+        <div class="form-group">
+          <label for="disponibilite">Disponibilite:</label>
+          <input type="text" id="disponibilite" name="disponibilite" required>
+        </div>
+        <!-- <div class="form-group">
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" rows="4"></textarea>
+        </div> -->
+        <button type="submit" class="btn-submit">Submit</button>
+      </form>
+    </div>
+    
+    
+  </body>
+</html>

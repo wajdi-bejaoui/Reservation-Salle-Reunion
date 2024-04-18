@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sample Table</title>
+  <style>
+    /* Style the table */
+.table-container {
+    margin: 0 auto;
+  width: 80%;
+  border-collapse: collapse;
+}
+
+/* Style table header */
+.table-container th {
+  background-color: #f2f2f2;
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+/* Style table rows */
+.table-container tr {
+  border-bottom: 1px solid #ddd;
+}
+
+/* Style alternate row background */
+.table-container tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Style table data */
+.table-container td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.container {
+    /* align-items: center; */
+    /* margin-top: ; */
+    padding: 20px;
+}
+
+table {
+    width:100%
+}
+
+.btn {
+  display: block;
+  width: 150px;
+  height: 50px;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-delete {
+  display: block;
+  height: 30px;
+  padding: 10px;
+  background-color: #af4c4c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-update {
+  display: block;
+  height: 30px;
+  padding: 10px;
+  background-color: #4f4caf;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.group {
+    display: flex;
+}
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="table-container">
+        <div class="row">
+            <h2>List salle de reunion</h2>
+            <button class="btn">Ajout</button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Capacite</th>
+              <th>Equipements</th>
+              <th>Disponibilite</th>
+              <th>Options</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>John Doe</td>
+              <td>john@example.com</td>
+              <td>Admin</td>
+              <td>john@example.com</td>
+              <td class="group">
+                <button class="btn-update">
+                    update
+                </button>
+                <button class="btn-delete">
+                    delete
+                </button>
+              </td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+</div>
+
+</body>
+</html>
