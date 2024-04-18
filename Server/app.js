@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 5000
 
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true })); 
 app.set('view engine', 'ejs');
 
 const authRoutes = require("./Routes/authRoutes")

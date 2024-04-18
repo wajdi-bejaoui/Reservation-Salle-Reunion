@@ -20,7 +20,7 @@ const createSalle = async (req, res) => {
 
 const getAllSalles = async (req, res) => {
   const salles = await SalleReunion.find({ })
-  console.log(salles)
+  // console.log(salles)
 
   if (salles) 
     // return res.status(StatusCodes.OK).json({ salles });
