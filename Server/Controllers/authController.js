@@ -63,15 +63,21 @@ const login = async (req, res) => {
         const token = jwt.sign({user : doc}, secretKey, { expiresIn: '24h' });
 
         res.cookie('token', token); 
-        res.redirect('/reservation');
+        res.redirect('/ListSalleReunion');
 
     
         // res.json({ msg: "Welcome", token: token });
 }
 
+const logout = async (req, res) => {
+    res.clearCookie('token');
+   
+    res.redirect('/signin');
+}
 
 module.exports = {
     register,
-    login
+    login,
+    logout
   };
   

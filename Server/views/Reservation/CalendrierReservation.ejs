@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sample Table</title>
+  <style>
+    /* Style the table */
+.table-container {
+    margin: 0 auto;
+  width: 80%;
+  border-collapse: collapse;
+}
+
+/* Style table header */
+.table-container th {
+  background-color: #f2f2f2;
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+/* Style table rows */
+.table-container tr {
+  border-bottom: 1px solid #ddd;
+}
+
+/* Style alternate row background */
+.table-container tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Style table data */
+.table-container td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.container {
+    /* align-items: center; */
+    /* margin-top: ; */
+    padding: 20px;
+}
+
+table {
+    width:100%
+}
+
+.btn {
+  display: block;
+  width: 150px;
+  height: 50px;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-delete {
+  display: block;
+  height: 30px;
+  padding: 10px;
+  background-color: #af4c4c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-update {
+  display: block;
+  height: 30px;
+  padding: 10px;
+  background-color: #4f4caf;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.group {
+    display: flex;
+}
+
+  </style>
+
+</head>
+<body>
+  <%- include('../navbar.ejs') %>
+
+<div class="container">
+    <div class="table-container">
+        <div class="row">
+            <h2>List reservation</h2>
+            <!-- <button class="btn">Ajout</button> -->
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Date</th>
+              <th>Start</th>
+              <th>End</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            <% if (list.length > 0 ) { %>
+                <%list.forEach(reservation => { %>
+                    <h3> 
+                        <tr>
+                            <td><%= reservation._id %></td>
+                            <td><%= reservation.date.getFullYear() + '/' + (reservation.date.getMonth()+1) + '/' +reservation.date.getDate() %></td>
+                            <td><%= reservation.start %></td>
+                            <td><%= reservation.end %></td>
+                          </tr>
+
+                <% }) %>
+            <% } else { %>
+            <h3>no reservation yet</h3>
+            <% } %>
+            
+            
+          </tbody>
+        </table>
+      </div>
+</div>
+
+</body>
+</html>

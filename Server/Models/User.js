@@ -4,12 +4,14 @@ const mongoose = require("mongoose");
 const jwt = require ("jsonwebtoken");
 
 const userSchema = mongoose.Schema({
-        username:{
+        fullname:{
          type:String,
-         unique:true
         },
         password : String,
-        email:String,
+        email:{
+         type : String,
+         unique:true
+        },
         role : {
          type: String,
          enum: ['admin', 'user'],

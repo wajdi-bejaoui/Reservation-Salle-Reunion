@@ -10,16 +10,18 @@ const {
     getAllReservations,
     updateReservation,
     deleteReservation,
+    calendrierReservation,
+    
   } = require('../Controllers/reservationController');
 
   const { authenticateUser } = require('../middleware/authentication');
   
 
 
-
-router.post('/', authenticateUser, createReservation);
-router.delete('/:id',authenticateUser, deleteReservation);
-router.get('/',authenticateUser, getAllReservations);
-router.put('/:id',authenticateUser, updateReservation);
+router.post('/api/AddReservation/:id', authenticateUser, createReservation);
+router.delete('/api/DeleteReservation/:id',authenticateUser, deleteReservation);
+router.get('/ListReservation',authenticateUser, getAllReservations);
+router.get('/calendrierReservation/:id',authenticateUser, calendrierReservation);
+router.post('/api/UpdateReservation/:id',authenticateUser, updateReservation);
 
 module.exports = router; 

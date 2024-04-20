@@ -6,10 +6,10 @@ const { StatusCodes } = require('http-status-codes');
 
 
 
-const createReservation = async (req, res) => {
-  console.log(req.body)
-  const { salleReunionId, date, start, end } = req.body;
 
+const createReservation = async (req, res) => {
+  const {  date, start, end } = req.body;
+  const salleReunionId = req.params.id;
 const reservationExist = await Reservation.findOne({
     salleReunion: salleReunionId,
     date: date,
@@ -42,12 +42,15 @@ if (reservationExist) {
     }
   }
 
+  console.log(req.user.id)
+
   req.body.salleReunion = salleReunionId
   req.body.user = req.user.id
 
   const reservation = await Reservation.create(req.body);
   if (reservation)
-    return res.status(StatusCodes.CREATED).json({ reservation });
+    // return res.status(StatusCodes.CREATED).json({ reservation });
+    return res.redirect('/ListReservation');
   else
     return res.status(StatusCodes.BAD_REQUEST).json({ msg : 'invalid data' });
   
@@ -56,12 +59,12 @@ if (reservationExist) {
 
 
 const getAllReservations = async (req, res) => {
-  const Reservations = await Reservation.find({ user : req.user.id }).populate("salleReunion")
+  const reservations = await Reservation.find({ user : req.user.id }).populate("salleReunion")
 
-  if (Reservations) 
-    return res.status(StatusCodes.OK).json({ Reservations });
+  if (reservations) 
+    res.render('Reservation/MyReservation', { list : reservations });
   else
-    return res.status(StatusCodes.NOT_FOUND).json({ msg : 'there are no reservations' });
+  res.render('Reservation/MyReservation', { list : [] });
 
 
 };
@@ -77,10 +80,10 @@ const updateReservation = async (req, res) => {
     return res.status(StatusCodes.NOT_FOUND).json({ msg: `No reservation with id ${reservationId}`});
   }
 
-  const salleReunion = await SalleReunion.findOne({ _id: req.body.salleReunionId });
+  const salleReunion = await SalleReunion.findOne({ _id: reservation.salleReunion });
 
   if (!salleReunion) {
-    return res.status(StatusCodes.NOT_FOUND).json({ msg: `No room with id ${req.body.salleReunionId}`});
+    return res.status(StatusCodes.NOT_FOUND).json({ msg: `No room with id ${reservation.salleReunion}`});
   }
 
   if (req.body.start >= req.body.end) {
@@ -99,7 +102,7 @@ const updateReservation = async (req, res) => {
 
   // checkPermissions(req.user, review.user);
 
-  reservation.salleReunion = salleReunionId
+  // reservation.salleReunion = req.body.salleReunion
   reservation.user = req.user.id
   reservation.start = req.body.start
   reservation.end = req.body.end
@@ -107,35 +110,46 @@ const updateReservation = async (req, res) => {
 
   const UpdatedReservation = await reservation.save();
   if (UpdatedReservation)
-    return res.status(StatusCodes.OK).json({ salle : UpdatedReservation });
+    // return res.status(StatusCodes.OK).json({ salle : UpdatedReservation });
+    return res.redirect('/ListReservation');
   else
     return res.status(StatusCodes.BAD_REQUEST).json({ msg : 'invalid data' });
 };
 
 const deleteReservation = async (req, res) => {
   const { id: reservationId } = req.params;
-
   const reservation = await Reservation.findOne({ _id: reservationId });
 
   if (!reservation) {
-    res.status(StatusCodes.NOT_FOUND).json({ msg: `No reservationId with id ${reservationId}`});
+    return res.status(StatusCodes.NOT_FOUND).json({ msg: `No reservationId with id ${reservationId}`});
   }
-
   // checkPermissions(req.user, review.user);
   try {
-    console.log(reservation)
-
-    await reservation.remove();
+    const deleted = await Reservation.findByIdAndDelete(reservationId);
+    return res.redirect('/ListReservation');
   }catch(error) {
-    res.json({ error });
+    return res.json({ error });
   }
-  res.status(StatusCodes.OK).json({ reservation });
+  
 };
 
+
+const calendrierReservation = async (req, res) => {
+  const reservations = await Reservation.find({ salleReunion : req.params.id })
+
+  if (reservations) 
+    res.render('Reservation/CalendrierReservation', { list : reservations });
+  else
+  res.render('Reservation/CalendrierReservation', { list : [] });
+
+
+};
 
 module.exports = {
   createReservation,
   getAllReservations,
   updateReservation,
   deleteReservation,
+  calendrierReservation,
+  
 };

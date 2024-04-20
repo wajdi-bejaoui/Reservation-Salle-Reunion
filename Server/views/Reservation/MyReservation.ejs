@@ -101,60 +101,49 @@ table {
 <div class="container">
     <div class="table-container">
         <div class="row">
-            <h2>List salle de reunion</h2>
-            <a href="/AddSalleReunion"><button class="btn">Ajout</button></a>
-            
+            <h2>List reservation</h2>
+            <!-- <button class="btn">Ajout</button> -->
         </div>
         <table>
           <thead>
             <tr>
-              <th>Num</th>
-              <th>Capacite</th>
-              <th>Equipements</th>
-              <th>Disponibilite</th>
+              <th>Id</th>
+              <th>Date</th>
+              <th>Start</th>
+              <th>End</th>
+              <th>Salle de reunion</th>
               <th>Options</th>
             </tr>
           </thead>
           <tbody>
             
             <% if (list.length > 0 ) { %>
-                <%list.forEach(room => { %>
+                <%list.forEach(reservation => { %>
                     <h3> 
                         <tr>
-                            <td><%= room.num %></td>
-                            <td><%= room.capacite %></td>
-                            <td><%= room.equipements %></td>
-                            <td><%= room.disponibilite %></td>
+                            <td><%= reservation._id %></td>
+                            <td><%= reservation.date.getFullYear() + '/' + (reservation.date.getMonth()+1) + '/' +reservation.date.getDate() %></td>
+                            <td><%= reservation.start %></td>
+                            <td><%= reservation.end %></td>
+                            <td><%= reservation.salleReunion.num %></td>
                             <td class="group">
-                              <% if (user.role === 'admin' ) { %>
-                              <a href="/UpdateSalleReunion/<%= room._id %>">
+                              <a href="/UpdateReservation/<%= reservation._id %>">
                                 <button class="btn-update">
-                                  update
+                                  Update
                                 </button>
                               </a>
-                              <a class="deleteLink" data-id="<%= room._id %>">
+                              <a class="deleteLink" data-id="<%= reservation._id %>">
                                 <button class="btn-delete">
-                                  delete
+                                  Annuler
                                 </button>
                               </a>
-                              <% } else { %>
-                                <a href="/calendrierReservation/<%= room._id %>">
-                                  <button class="btn-update">
-                                    Calendrier
-                                  </button>
-                                </a>
-                                <a href="/AddReservationForm/<%= room._id %>">
-                                  <button class="btn-delete">
-                                    Reserver
-                                  </button>
-                                </a>
-                                <% } %>
+                              
                             </td>
                           </tr>
 
                 <% }) %>
             <% } else { %>
-            <h3>no rooms yet</h3>
+            <h3>no reservation yet</h3>
             <% } %>
             
             
@@ -164,8 +153,6 @@ table {
 </div>
 
 <script>
-
-
 // Add event listeners to all elements with the class 'deleteLink'
 document.querySelectorAll('.deleteLink').forEach(link => {
   link.addEventListener('click', function(event) {
@@ -175,7 +162,7 @@ document.querySelectorAll('.deleteLink').forEach(link => {
     const id = this.getAttribute('data-id');
 
     // Send DELETE request using fetch
-    fetch(`/api/DeleteSalleReunion/${id}`, {
+    fetch(`/api/DeleteReservation/${id}`, {
       method: 'DELETE'
     })
     .then(response => {

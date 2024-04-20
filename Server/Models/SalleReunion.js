@@ -16,6 +16,7 @@ const salleReunionSchema = mongoose.Schema({
          type : Boolean,
          default : true,
         },
+        num: Number
 },
 { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );

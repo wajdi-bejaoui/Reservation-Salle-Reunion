@@ -1,5 +1,5 @@
 
-  <!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -63,28 +63,25 @@
   <body>
     <%- include('../navbar.ejs') %>
     <div class="form-container">
-      <h2>Ajout salle de reunion</h2>
-      <form action="/api/AddSalleReunion" method="POST">
+      <h2>Mise a jour salle de reunion</h2>
+      <form action="/api/UpdateSalleReunion/<%= salle._id %>" method="POST">
+        
         <div class="form-group">
           <label for="num">Num:</label>
-          <input type="number" id="num" name="num" required>
+          <input type="number" id="num" name="num" value="<%= salle.num %>" required>
         </div>
         <div class="form-group">
           <label for="capacite">Capacite:</label>
-          <input type="number" id="capacite" name="capacite" required>
+          <input type="number" id="capacite" name="capacite" value="<%= salle.capacite %>"  required>
         </div>
         <div class="form-group">
           <label for="equipements">Equipements:</label>
-          <input type="text" id="equipements" name="equipements" required>
+          <input type="text" id="equipements" name="equipements" value="<%= salle.equipements %>" required>
         </div>
         <div class="form-group">
           <label for="disponibilite">Disponibilite:</label>
-          <input type="text" id="disponibilite" name="disponibilite" required>
+          <input type="text" id="disponibilite" name="disponibilite" value="<%= salle.disponibilite %>" required>
         </div>
-        <!-- <div class="form-group">
-          <label for="message">Message:</label>
-          <textarea id="message" name="message" rows="4"></textarea>
-        </div> -->
         <button type="submit" class="btn-submit">Submit</button>
       </form>
     </div>
